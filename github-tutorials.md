@@ -16,12 +16,12 @@
     git clone https://github.com/username/new-repo.git
     ```
 ## 
-> ## <font color="Lime"> Set Name and Email for push </font>
-```
-git config user.name "AbrarRajin"
-git config user.email "abrarrajin@gmail.com"
-```
-
+> ## <font color="Lime"> Set Name and Email for git push </font>
+    ```
+    git config user.name "AbrarRajin"
+    git config user.email "abrarrajin@gmail.com"
+    ```
+---
 
 
 
