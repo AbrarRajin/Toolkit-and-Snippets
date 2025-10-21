@@ -17,12 +17,13 @@
     ```
 ## 
 > ## <font color="Lime"> Set Name and Email for git push </font>
+
     ```
     git config user.name "AbrarRajin"
     git config user.email "abrarrajin@gmail.com"
     ```
 ---
-
+> ## <font color="Lime"> Placeholder </font>
 
 
 

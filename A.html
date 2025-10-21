@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colour picker</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #1a1a1a;
+            color: #ffffff;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 820px;
+            background: #2a2a2a;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 24px;
+            background: #222;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            font-weight: 400;
+        }
+
+        .share-btn {
+            background: none;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 4px;
+            transition: background 0.2s;
+        }
+
+        .share-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .picker-area {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            cursor: crosshair;
+            background: linear-gradient(to right, #fff, #f00);
+        }
+
+        .picker-area canvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        .picker-cursor {
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            border: 3px solid #fff;
+            border-radius: 50%;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.3), 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .hue-slider-container {
+            padding: 24px;
+            background: #2a2a2a;
+        }
+
+        .hue-slider {
+            position: relative;
+            width: 100%;
+            height: 20px;
+            border-radius: 10px;
+            background: linear-gradient(to right, 
+                #ff0000 0%, 
+                #ffff00 17%, 
+                #00ff00 33%, 
+                #00ffff 50%, 
+                #0000ff 67%, 
+                #ff00ff 83%, 
+                #ff0000 100%);
+            cursor: pointer;
+        }
+
+        .hue-cursor {
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            border: 3px solid #fff;
+            border-radius: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.3), 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .color-info {
+            padding: 24px;
+            background: #2a2a2a;
+        }
+
+        .hex-display {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #1a1a1a;
+            padding: 16px 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .hex-display label {
+            font-size: 12px;
+            color: #888;
+            margin-bottom: 4px;
+            display: block;
+        }
+
+        .hex-value {
+            font-size: 18px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .copy-btn {
+            background: none;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 4px;
+            transition: background 0.2s;
+        }
+
+        .copy-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .color-formats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 16px;
+        }
+
+        .format-box {
+            background: #1a1a1a;
+            padding: 16px;
+            border-radius: 8px;
+        }
+
+        .format-box label {
+            font-size: 12px;
+            color: #888;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .format-box .value {
+            font-size: 14px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .copied-toast {
+            position: fixed;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #4CAF50;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            opacity: 0;
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+
+        .copied-toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Colour picker</h1>
+            <button class="share-btn" onclick="shareColor()">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path>
+                    <polyline points="16 6 12 2 8 6"></polyline>
+                    <line x1="12" y1="2" x2="12" y2="15"></line>
+                </svg>
+            </button>
+        </div>
+
+        <div class="picker-area" id="pickerArea">
+            <canvas id="pickerCanvas"></canvas>
+            <div class="picker-cursor" id="pickerCursor"></div>
+        </div>
+
+        <div class="hue-slider-container">
+            <div class="hue-slider" id="hueSlider">
+                <div class="hue-cursor" id="hueCursor"></div>
+            </div>
+        </div>
+
+        <div class="color-info">
+            <div class="hex-display">
+                <div>
+                    <label>HEX</label>
+                    <div class="hex-value" id="hexValue">#4287f5</div>
+                </div>
+                <button class="copy-btn" onclick="copyHex()">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="color-formats">
+                <div class="format-box">
+                    <label>RGB</label>
+                    <div class="value" id="rgbValue">66, 135, 245</div>
+                </div>
+                <div class="format-box">
+                    <label>CMYK</label>
+                    <div class="value" id="cmykValue">73%, 45%, 0%, 4%</div>
+                </div>
+                <div class="format-box">
+                    <label>HSV</label>
+                    <div class="value" id="hsvValue">217°, 73%, 96%</div>
+                </div>
+                <div class="format-box">
+                    <label>HSL</label>
+                    <div class="value" id="hslValue">217°, 90%, 61%</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="copied-toast" id="copiedToast">Copied to clipboard!</div>
+
+    <script>
+        const pickerArea = document.getElementById('pickerArea');
+        const pickerCanvas = document.getElementById('pickerCanvas');
+        const pickerCursor = document.getElementById('pickerCursor');
+        const hueSlider = document.getElementById('hueSlider');
+        const hueCursor = document.getElementById('hueCursor');
+        
+        let currentHue = 217;
+        let currentSaturation = 73;
+        let currentValue = 96;
+        
+        let isDraggingPicker = false;
+        let isDraggingHue = false;
+
+        // Initialize canvas
+        function initCanvas() {
+            const rect = pickerArea.getBoundingClientRect();
+            pickerCanvas.width = rect.width;
+            pickerCanvas.height = rect.height;
+            drawPicker();
+        }
+
+        // Draw the color picker gradient
+        function drawPicker() {
+            const ctx = pickerCanvas.getContext('2d');
+            const width = pickerCanvas.width;
+            const height = pickerCanvas.height;
+
+            // Base color from hue
+            const baseColor = hsvToRgb(currentHue, 100, 100);
+            
+            // White to base color gradient (left to right)
+            const gradientH = ctx.createLinearGradient(0, 0, width, 0);
+            gradientH.addColorStop(0, '#ffffff');
+            gradientH.addColorStop(1, `rgb(${baseColor.r}, ${baseColor.g}, ${baseColor.b})`);
+            ctx.fillStyle = gradientH;
+            ctx.fillRect(0, 0, width, height);
+
+            // Transparent to black gradient (top to bottom)
+            const gradientV = ctx.createLinearGradient(0, 0, 0, height);
+            gradientV.addColorStop(0, 'rgba(0, 0, 0, 0)');
+            gradientV.addColorStop(1, 'rgba(0, 0, 0, 1)');
+            ctx.fillStyle = gradientV;
+            ctx.fillRect(0, 0, width, height);
+        }
+
+        // HSV to RGB conversion
+        function hsvToRgb(h, s, v) {
+            h = h / 360;
+            s = s / 100;
+            v = v / 100;
+            
+            let r, g, b;
+            const i = Math.floor(h * 6);
+            const f = h * 6 - i;
+            const p = v * (1 - s);
+            const q = v * (1 - f * s);
+            const t = v * (1 - (1 - f) * s);
+            
+            switch (i % 6) {
+                case 0: r = v; g = t; b = p; break;
+                case 1: r = q; g = v; b = p; break;
+                case 2: r = p; g = v; b = t; break;
+                case 3: r = p; g = q; b = v; break;
+                case 4: r = t; g = p; b = v; break;
+                case 5: r = v; g = p; b = q; break;
+            }
+            
+            return {
+                r: Math.round(r * 255),
+                g: Math.round(g * 255),
+                b: Math.round(b * 255)
+            };
+        }
+
+        // RGB to HSV conversion
+        function rgbToHsv(r, g, b) {
+            r /= 255;
+            g /= 255;
+            b /= 255;
+            
+            const max = Math.max(r, g, b);
+            const min = Math.min(r, g, b);
+            const delta = max - min;
+            
+            let h = 0;
+            if (delta !== 0) {
+                if (max === r) {
+                    h = ((g - b) / delta + (g < b ? 6 : 0)) / 6;
+                } else if (max === g) {
+                    h = ((b - r) / delta + 2) / 6;
+                } else {
+                    h = ((r - g) / delta + 4) / 6;
+                }
+            }
+            
+            const s = max === 0 ? 0 : delta / max;
+            const v = max;
+            
+            return {
+                h: Math.round(h * 360),
+                s: Math.round(s * 100),
+                v: Math.round(v * 100)
+            };
+        }
+
+        // RGB to CMYK conversion
+        function rgbToCmyk(r, g, b) {
+            r /= 255;
+            g /= 255;
+            b /= 255;
+            
+            const k = 1 - Math.max(r, g, b);
+            const c = k === 1 ? 0 : (1 - r - k) / (1 - k);
+            const m = k === 1 ? 0 : (1 - g - k) / (1 - k);
+            const y = k === 1 ? 0 : (1 - b - k) / (1 - k);
+            
+            return {
+                c: Math.round(c * 100),
+                m: Math.round(m * 100),
+                y: Math.round(y * 100),
+                k: Math.round(k * 100)
+            };
+        }
+
+        // RGB to HSL conversion
+        function rgbToHsl(r, g, b) {
+            r /= 255;
+            g /= 255;
+            b /= 255;
+            
+            const max = Math.max(r, g, b);
+            const min = Math.min(r, g, b);
+            const delta = max - min;
+            
+            let h = 0;
+            if (delta !== 0) {
+                if (max === r) {
+                    h = ((g - b) / delta + (g < b ? 6 : 0)) / 6;
+                } else if (max === g) {
+                    h = ((b - r) / delta + 2) / 6;
+                } else {
+                    h = ((r - g) / delta + 4) / 6;
+                }
+            }
+            
+            const l = (max + min) / 2;
+            const s = delta === 0 ? 0 : delta / (1 - Math.abs(2 * l - 1));
+            
+            return {
+                h: Math.round(h * 360),
+                s: Math.round(s * 100),
+                l: Math.round(l * 100)
+            };
+        }
+
+        // Update all color displays
+        function updateColor() {
+            const rgb = hsvToRgb(currentHue, currentSaturation, currentValue);
+            const hex = `#${rgb.r.toString(16).padStart(2, '0')}${rgb.g.toString(16).padStart(2, '0')}${rgb.b.toString(16).padStart(2, '0')}`;
+            const cmyk = rgbToCmyk(rgb.r, rgb.g, rgb.b);
+            const hsl = rgbToHsl(rgb.r, rgb.g, rgb.b);
+            
+            document.getElementById('hexValue').textContent = hex;
+            document.getElementById('rgbValue').textContent = `${rgb.r}, ${rgb.g}, ${rgb.b}`;
+            document.getElementById('cmykValue').textContent = `${cmyk.c}%, ${cmyk.m}%, ${cmyk.y}%, ${cmyk.k}%`;
+            document.getElementById('hsvValue').textContent = `${currentHue}°, ${currentSaturation}%, ${currentValue}%`;
+            document.getElementById('hslValue').textContent = `${hsl.h}°, ${hsl.s}%, ${hsl.l}%`;
+        }
+
+        // Handle picker area interaction
+        function updatePickerPosition(e) {
+            const rect = pickerArea.getBoundingClientRect();
+            const x = Math.max(0, Math.min(e.clientX - rect.left, rect.width));
+            const y = Math.max(0, Math.min(e.clientY - rect.top, rect.height));
+            
+            currentSaturation = Math.round((x / rect.width) * 100);
+            currentValue = Math.round((1 - y / rect.height) * 100);
+            
+            pickerCursor.style.left = x + 'px';
+            pickerCursor.style.top = y + 'px';
+            
+            updateColor();
+        }
+
+        // Handle hue slider interaction
+        function updateHuePosition(e) {
+            const rect = hueSlider.getBoundingClientRect();
+            const x = Math.max(0, Math.min(e.clientX - rect.left, rect.width));
+            
+            currentHue = Math.round((x / rect.width) * 360);
+            
+            hueCursor.style.left = x + 'px';
+            
+            drawPicker();
+            updateColor();
+        }
+
+        // Event listeners for picker area
+        pickerArea.addEventListener('mousedown', (e) => {
+            isDraggingPicker = true;
+            updatePickerPosition(e);
+        });
+
+        // Event listeners for hue slider
+        hueSlider.addEventListener('mousedown', (e) => {
+            isDraggingHue = true;
+            updateHuePosition(e);
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            if (isDraggingPicker) {
+                updatePickerPosition(e);
+            }
+            if (isDraggingHue) {
+                updateHuePosition(e);
+            }
+        });
+
+        document.addEventListener('mouseup', () => {
+            isDraggingPicker = false;
+            isDraggingHue = false;
+        });
+
+        // Copy hex value to clipboard
+        function copyHex() {
+            const hexValue = document.getElementById('hexValue').textContent;
+            navigator.clipboard.writeText(hexValue).then(() => {
+                showToast();
+            });
+        }
+
+        // Share color
+        function shareColor() {
+            const hexValue = document.getElementById('hexValue').textContent;
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Color',
+                    text: `Check out this color: ${hexValue}`
+                });
+            } else {
+                copyHex();
+            }
+        }
+
+        // Show copied toast
+        function showToast() {
+            const toast = document.getElementById('copiedToast');
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2000);
+        }
+
+        // Initialize with default color
+        window.addEventListener('load', () => {
+            initCanvas();
+            
+            // Set initial positions
+            const pickerRect = pickerArea.getBoundingClientRect();
+            pickerCursor.style.left = (currentSaturation / 100 * pickerRect.width) + 'px';
+            pickerCursor.style.top = ((100 - currentValue) / 100 * pickerRect.height) + 'px';
+            
+            const hueRect = hueSlider.getBoundingClientRect();
+            hueCursor.style.left = (currentHue / 360 * hueRect.width) + 'px';
+            
+            updateColor();
+        });
+
+        window.addEventListener('resize', () => {
+            initCanvas();
+        });
+    </script>
+</body>
+</html>
