@@ -9,3 +9,9 @@
 This is a simple color picker with Hex values.
 
  <img src="image-source/Colorpicker.png" alt="Color picker" width="200" height="150">
+
+---
+## Github Tutorials
+github FAQ on setup via VSCODE [md file](/Tutorials-page/github-tutorials.md)  
+
+---
