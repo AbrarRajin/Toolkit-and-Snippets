@@ -16,7 +16,7 @@ This is a simple color picker with Hex values.
 
 ---
 ## Github Tutorials
-github FAQ on setup via VSCODE [md file](/Tutorials-page/github-tutorials.md)  
+github FAQ on setup via VSCODE [md file](/github-all/github-tutorials.md)  
 
 ---
 ## Python Basics Cheatsheet
