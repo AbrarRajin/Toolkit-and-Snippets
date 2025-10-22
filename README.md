@@ -19,3 +19,5 @@ This is a simple color picker with Hex values.
 github FAQ on setup via VSCODE [md file](/Tutorials-page/github-tutorials.md)  
 
 ---
+## Python Basics Cheatsheet
+Quick look at all basic python codes. [Quickref](https://quickref.me/python)
