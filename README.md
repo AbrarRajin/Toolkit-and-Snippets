@@ -31,4 +31,9 @@ vscode://file/D:/Workbench/Projects/Coding/Toolkit-and-Snippets
 
 ---
 - ## Recommended PC Apps
-    > [Here](/Others/PC-apps-recommend.md) is a list of PC windows apps that has been really useful and made life easier.
+    > [Here](/Others/PC-apps-recommend.md) is a list of PC windows apps that has been really useful.
+
+- ## All Emojis in one page
+    >[Website](https://www.freecodecamp.org/news/all-emojis-emoji-list-for-copy-and-paste/)
+
+- ## 
