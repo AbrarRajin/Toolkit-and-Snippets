@@ -36,4 +36,8 @@ vscode://file/D:/Workbench/Projects/Coding/Toolkit-and-Snippets
 - ## All Emojis in one page
     >[Website](https://www.freecodecamp.org/news/all-emojis-emoji-list-for-copy-and-paste/)
 
+- ## Python Tutorials
+    >[md file](/Tutorials/python-tutorials.md)
+
 - ## 
+
