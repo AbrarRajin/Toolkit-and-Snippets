@@ -8,9 +8,8 @@ vscode://file/D:/Workbench/Projects/Coding/Toolkit-and-Snippets
 </center>
 
 - ## Color Picker
-    >[Live](https://abrarrajin.github.io/Toolkit-and-Snippets/color-picker/color-picker.html) [/ md file](/color-picker/color-picker.md)
-
-    This is a simple color picker with Hex values.
+    >[Live](https://abrarrajin.github.io/Toolkit-and-Snippets/color-picker/color-picker.html) [/ md file](/color-picker/color-picker.md)  
+    >This is a simple color picker with Hex values.
 
     <img src="image-source/Colorpicker.png" alt="Color picker" width="200" height="150">
 
@@ -27,4 +26,9 @@ vscode://file/D:/Workbench/Projects/Coding/Toolkit-and-Snippets
     >All my github repositories are linked [Here](/github-all/my-repo.md) with local folders.
 
 ---
+- ## Free Media Heck Yeah
+    > [Live Github page](/https://fmhy.net/) to all useful sites and tricks. direct git [link](https://github.com/fmhy/edit)
 
+---
+- ## Recommended PC Apps
+    > [Here](/Others/PC-apps-recommend.md) is a list of PC windows apps that has been really useful and made life easier.
