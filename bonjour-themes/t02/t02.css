@@ -1,0 +1,230 @@
+/* Import Google Font for clock - Geometric/Modern inspired */
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&display=swap');
+
+/* Hides photo author credits */
+#credit {
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.4s, visibility 0.4s;
+}
+
+#credit-container:hover #credit {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Adds a C after the temperature */
+#current::after,
+#tempContainer p::after {
+    content: 'c';
+}
+
+/* Search bar styling - Visible border */
+input[type="search"],
+input[type="text"],
+.search-bar,
+#search,
+input {
+    border: 2px solid rgba(100, 181, 246, 0.6) !important;
+    background: rgba(30, 50, 80, 0.4) !important;
+    color: #B0D4E8 !important;
+    padding: 10px 15px !important;
+    border-radius: 4px !important;
+    backdrop-filter: blur(10px) !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 
+        inset 0 1px 3px rgba(0, 0, 0, 0.3),
+        0 2px 8px rgba(0, 0, 0, 0.2) !important;
+}
+
+input[type="search"]:focus,
+input[type="text"]:focus,
+.search-bar:focus,
+#search:focus,
+input:focus {
+    border: 2px solid rgba(100, 181, 246, 0.9) !important;
+    outline: none !important;
+    box-shadow: 
+        inset 0 1px 3px rgba(0, 0, 0, 0.3),
+        0 0 20px rgba(100, 181, 246, 0.3),
+        0 4px 12px rgba(64, 136, 207, 0.2) !important;
+}
+
+input::placeholder {
+    color: rgba(176, 212, 232, 0.5) !important;
+}
+
+/* Button styling - Geometric Crystal Theme */
+button {
+    height: 45px;
+    border: 2px solid rgba(100, 181, 246, 0.5);
+    background: linear-gradient(135deg, rgba(30, 50, 80, 0.6), rgba(20, 40, 70, 0.4));
+    color: #B0C4DE;
+    transition: all 0.3s ease;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    backdrop-filter: blur(15px);
+    box-shadow: 
+        inset 0 1px 0 rgba(255, 255, 255, 0.1),
+        0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+button:hover {
+    background: linear-gradient(135deg, rgba(40, 70, 110, 0.8), rgba(30, 60, 100, 0.6));
+    color: #E0F2F7;
+    border: 2px solid rgba(100, 181, 246, 0.8);
+    box-shadow: 
+        inset 0 1px 0 rgba(255, 255, 255, 0.15),
+        0 4px 16px rgba(64, 136, 207, 0.4),
+        0 0 30px rgba(100, 181, 246, 0.2);
+    transform: translateY(-1px);
+} 
+
+/* Clock styling - Geometric Glow - UPDATED SELECTORS */
+#time-container .digital,
+#clock-wrapper .digital {
+    font-family: 'Rajdhani', sans-serif !important;
+    font-weight: 700 !important;
+    font-size: 10rem !important;
+    letter-spacing: 20px !important;
+    text-transform: uppercase !important;
+    color: #B0D4E8 !important;
+    text-shadow: 
+        0 0 15px rgba(176, 212, 232, 0.6),
+        0 0 30px rgba(100, 181, 246, 0.4),
+        0 0 50px rgba(64, 136, 207, 0.3),
+        0 2px 4px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Additional specificity for all digital clock elements - UPDATED */
+#time-container h1.digital,
+#clock-wrapper h1.digital,
+#time-container .digital-ampm,
+#clock-wrapper .digital-ampm,
+#time-container .digital-hh,
+#clock-wrapper .digital-hh,
+#time-container .digital-mm,
+#clock-wrapper .digital-mm,
+#time-container .digital-ss,
+#clock-wrapper .digital-ss,
+#time-container .digital-hh-leading-zero,
+#clock-wrapper .digital-hh-leading-zero,
+#time-container .digital-mm-leading-zero,
+#clock-wrapper .digital-mm-leading-zero,
+#time-container .digital-ss-leading-zero,
+#clock-wrapper .digital-ss-leading-zero {
+    font-family: 'Rajdhani', sans-serif !important;
+    font-weight: 700 !important;
+    color: #B0D4E8 !important;
+    text-shadow: 
+        0 0 15px rgba(176, 212, 232, 0.6),
+        0 0 30px rgba(100, 181, 246, 0.4),
+        0 0 50px rgba(64, 136, 207, 0.3),
+        0 2px 4px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Ensure the clock container has proper styling - UPDATED */
+#time-container,
+#clock-wrapper {
+    text-align: center;
+    font-family: 'Rajdhani', sans-serif;
+}
+
+/* Make sure spans inherit the styling - UPDATED */
+#time-container .digital span,
+#time-container .digital > span,
+#clock-wrapper .digital span,
+#clock-wrapper .digital > span {
+    color: inherit !important;
+    font-family: inherit !important;
+    text-shadow: inherit !important;
+    font-weight: inherit !important;
+}
+
+/* Clock separators styling - Crystalline accent - UPDATED */
+#time-container .digital-hh-separator,
+#time-container .digital-mm-separator,
+#clock-wrapper .digital-hh-separator,
+#clock-wrapper .digital-mm-separator {
+    color: #7FC8E8 !important;
+    font-family: 'Rajdhani', sans-serif !important;
+    font-weight: 700 !important;
+    text-shadow: 
+        0 0 10px rgba(127, 200, 232, 0.7),
+        0 0 20px rgba(100, 181, 246, 0.5),
+        0 0 35px rgba(64, 136, 207, 0.3) !important;
+}
+
+/* Chrome-specific fixes */
+@supports (-webkit-appearance: none) {
+    #time-container .digital *,
+    #clock-wrapper .digital * {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+}
+
+/* Force styling on any nested elements within digital clock - UPDATED */
+#time-container .digital *,
+#time-container .digital *::before,
+#time-container .digital *::after,
+#clock-wrapper .digital *,
+#clock-wrapper .digital *::before,
+#clock-wrapper .digital *::after {
+    font-family: 'Rajdhani', sans-serif !important;
+    color: #B0D4E8 !important;
+    text-shadow: 
+        0 0 15px rgba(176, 212, 232, 0.6),
+        0 0 30px rgba(100, 181, 246, 0.4),
+        0 0 50px rgba(64, 136, 207, 0.3),
+        0 2px 4px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Analog clock styling (if you have analog clock elements) */
+#time-container .analog,
+#clock-wrapper .analog {
+    color: #B0D4E8 !important;
+    filter: drop-shadow(0 0 10px rgba(176, 212, 232, 0.5)) 
+            drop-shadow(0 0 20px rgba(100, 181, 246, 0.3)) 
+            drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+}
+
+/* Time container styling */
+#time-container {
+    background: transparent;
+}
+
+/* Date styling if present - Soft steel blue - UPDATED */
+#time-container .clock-date,
+#time-container .date,
+#clock-wrapper .clock-date,
+#clock-wrapper .date {
+    font-family: 'Rajdhani', sans-serif !important;
+    color: #8EACC0 !important;
+    font-weight: 600 !important;
+    text-shadow: 
+        0 0 8px rgba(142, 172, 192, 0.5),
+        0 0 15px rgba(100, 140, 170, 0.3),
+        0 1px 3px rgba(0, 0, 0, 0.4) !important;
+}
+
+/* Secondary elements in muted blue */
+#time-container .secondary-info,
+#clock-wrapper .secondary-info {
+    color: #6B9EBD !important;
+    text-shadow: 
+        0 0 8px rgba(107, 158, 189, 0.4),
+        0 0 12px rgba(80, 130, 160, 0.2) !important;
+}
+
+/* AM/PM specific styling - Subtle ice blue accent - UPDATED */
+#time-container .digital-ampm,
+#clock-wrapper .digital-ampm {
+    color: #A7C7E7 !important;
+    font-size: 0.6em !important;
+    text-shadow: 
+        0 0 10px rgba(167, 199, 231, 0.5),
+        0 0 18px rgba(120, 180, 220, 0.3),
+        0 1px 3px rgba(0, 0, 0, 0.4) !important;
+}
