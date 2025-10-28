@@ -1,0 +1,947 @@
+{
+  "about": {
+    "browser": "chrome",
+    "version": "21.2.1"
+  },
+  "showall": true,
+  "lang": "en",
+  "dark": "enable",
+  "favicon": "⚽️",
+  "tabtitle": "NEW TAB | HOME",
+  "greeting": "",
+  "greetingsize": "3",
+  "pagegap": 1.5,
+  "pagewidth": 1800,
+  "time": true,
+  "main": false,
+  "dateformat": "auto",
+  "quicklinks": true,
+  "textShadow": 0.675,
+  "announcements": "major",
+  "review": -1,
+  "css": "/* Import Google Font for clock - Geometric/Modern inspired */\n@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&display=swap');\n\n/* Hides photo author credits */\n#credit {\n    visibility: hidden;\n    opacity: 0;\n    transition: opacity 0.4s, visibility 0.4s;\n}\n\n#credit-container:hover #credit {\n    visibility: visible;\n    opacity: 1;\n}\n\n/* Adds a C after the temperature */\n#current::after,\n#tempContainer p::after {\n    content: 'c';\n}\n\n/* Search bar styling - Visible border */\ninput[type=\"search\"],\ninput[type=\"text\"],\n.search-bar,\n#search,\ninput {\n    border: 2px solid rgba(100, 181, 246, 0.6) !important;\n    background: rgba(30, 50, 80, 0.4) !important;\n    color: #B0D4E8 !important;\n    padding: 10px 15px !important;\n    border-radius: 4px !important;\n    backdrop-filter: blur(10px) !important;\n    transition: all 0.3s ease !important;\n    box-shadow: \n        inset 0 1px 3px rgba(0, 0, 0, 0.3),\n        0 2px 8px rgba(0, 0, 0, 0.2) !important;\n}\n\ninput[type=\"search\"]:focus,\ninput[type=\"text\"]:focus,\n.search-bar:focus,\n#search:focus,\ninput:focus {\n    border: 2px solid rgba(100, 181, 246, 0.9) !important;\n    outline: none !important;\n    box-shadow: \n        inset 0 1px 3px rgba(0, 0, 0, 0.3),\n        0 0 20px rgba(100, 181, 246, 0.3),\n        0 4px 12px rgba(64, 136, 207, 0.2) !important;\n}\n\ninput::placeholder {\n    color: rgba(176, 212, 232, 0.5) !important;\n}\n\n/* Button styling - Geometric Crystal Theme */\nbutton {\n    height: 45px;\n    border: 2px solid rgba(100, 181, 246, 0.5);\n    background: linear-gradient(135deg, rgba(30, 50, 80, 0.6), rgba(20, 40, 70, 0.4));\n    color: #B0C4DE;\n    transition: all 0.3s ease;\n    font-weight: 600;\n    text-transform: uppercase;\n    letter-spacing: 1.5px;\n    backdrop-filter: blur(15px);\n    box-shadow: \n        inset 0 1px 0 rgba(255, 255, 255, 0.1),\n        0 2px 8px rgba(0, 0, 0, 0.3);\n}\n\nbutton:hover {\n    background: linear-gradient(135deg, rgba(40, 70, 110, 0.8), rgba(30, 60, 100, 0.6));\n    color: #E0F2F7;\n    border: 2px solid rgba(100, 181, 246, 0.8);\n    box-shadow: \n        inset 0 1px 0 rgba(255, 255, 255, 0.15),\n        0 4px 16px rgba(64, 136, 207, 0.4),\n        0 0 30px rgba(100, 181, 246, 0.2);\n    transform: translateY(-1px);\n} \n\n/* Clock styling - Geometric Glow - UPDATED SELECTORS */\n#time-container .digital,\n#clock-wrapper .digital {\n    font-family: 'Rajdhani', sans-serif !important;\n    font-weight: 700 !important;\n    font-size: 10rem !important;\n    letter-spacing: 20px !important;\n    text-transform: uppercase !important;\n    color: #B0D4E8 !important;\n    text-shadow: \n        0 0 15px rgba(176, 212, 232, 0.6),\n        0 0 30px rgba(100, 181, 246, 0.4),\n        0 0 50px rgba(64, 136, 207, 0.3),\n        0 2px 4px rgba(0, 0, 0, 0.5) !important;\n}\n\n/* Additional specificity for all digital clock elements - UPDATED */\n#time-container h1.digital,\n#clock-wrapper h1.digital,\n#time-container .digital-ampm,\n#clock-wrapper .digital-ampm,\n#time-container .digital-hh,\n#clock-wrapper .digital-hh,\n#time-container .digital-mm,\n#clock-wrapper .digital-mm,\n#time-container .digital-ss,\n#clock-wrapper .digital-ss,\n#time-container .digital-hh-leading-zero,\n#clock-wrapper .digital-hh-leading-zero,\n#time-container .digital-mm-leading-zero,\n#clock-wrapper .digital-mm-leading-zero,\n#time-container .digital-ss-leading-zero,\n#clock-wrapper .digital-ss-leading-zero {\n    font-family: 'Rajdhani', sans-serif !important;\n    font-weight: 700 !important;\n    color: #B0D4E8 !important;\n    text-shadow: \n        0 0 15px rgba(176, 212, 232, 0.6),\n        0 0 30px rgba(100, 181, 246, 0.4),\n        0 0 50px rgba(64, 136, 207, 0.3),\n        0 2px 4px rgba(0, 0, 0, 0.5) !important;\n}\n\n/* Ensure the clock container has proper styling - UPDATED */\n#time-container,\n#clock-wrapper {\n    text-align: center;\n    font-family: 'Rajdhani', sans-serif;\n}\n\n/* Make sure spans inherit the styling - UPDATED */\n#time-container .digital span,\n#time-container .digital > span,\n#clock-wrapper .digital span,\n#clock-wrapper .digital > span {\n    color: inherit !important;\n    font-family: inherit !important;\n    text-shadow: inherit !important;\n    font-weight: inherit !important;\n}\n\n/* Clock separators styling - Crystalline accent - UPDATED */\n#time-container .digital-hh-separator,\n#time-container .digital-mm-separator,\n#clock-wrapper .digital-hh-separator,\n#clock-wrapper .digital-mm-separator {\n    color: #7FC8E8 !important;\n    font-family: 'Rajdhani', sans-serif !important;\n    font-weight: 700 !important;\n    text-shadow: \n        0 0 10px rgba(127, 200, 232, 0.7),\n        0 0 20px rgba(100, 181, 246, 0.5),\n        0 0 35px rgba(64, 136, 207, 0.3) !important;\n}\n\n/* Chrome-specific fixes */\n@supports (-webkit-appearance: none) {\n    #time-container .digital *,\n    #clock-wrapper .digital * {\n        -webkit-font-smoothing: antialiased;\n        -moz-osx-font-smoothing: grayscale;\n    }\n}\n\n/* Force styling on any nested elements within digital clock - UPDATED */\n#time-container .digital *,\n#time-container .digital *::before,\n#time-container .digital *::after,\n#clock-wrapper .digital *,\n#clock-wrapper .digital *::before,\n#clock-wrapper .digital *::after {\n    font-family: 'Rajdhani', sans-serif !important;\n    color: #B0D4E8 !important;\n    text-shadow: \n        0 0 15px rgba(176, 212, 232, 0.6),\n        0 0 30px rgba(100, 181, 246, 0.4),\n        0 0 50px rgba(64, 136, 207, 0.3),\n        0 2px 4px rgba(0, 0, 0, 0.5) !important;\n}\n\n/* Analog clock styling (if you have analog clock elements) */\n#time-container .analog,\n#clock-wrapper .analog {\n    color: #B0D4E8 !important;\n    filter: drop-shadow(0 0 10px rgba(176, 212, 232, 0.5)) \n            drop-shadow(0 0 20px rgba(100, 181, 246, 0.3)) \n            drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));\n}\n\n/* Time container styling */\n#time-container {\n    background: transparent;\n}\n\n/* Date styling if present - Soft steel blue - UPDATED */\n#time-container .clock-date,\n#time-container .date,\n#clock-wrapper .clock-date,\n#clock-wrapper .date {\n    font-family: 'Rajdhani', sans-serif !important;\n    color: #8EACC0 !important;\n    font-weight: 600 !important;\n    text-shadow: \n        0 0 8px rgba(142, 172, 192, 0.5),\n        0 0 15px rgba(100, 140, 170, 0.3),\n        0 1px 3px rgba(0, 0, 0, 0.4) !important;\n}\n\n/* Secondary elements in muted blue */\n#time-container .secondary-info,\n#clock-wrapper .secondary-info {\n    color: #6B9EBD !important;\n    text-shadow: \n        0 0 8px rgba(107, 158, 189, 0.4),\n        0 0 12px rgba(80, 130, 160, 0.2) !important;\n}\n\n/* AM/PM specific styling - Subtle ice blue accent - UPDATED */\n#time-container .digital-ampm,\n#clock-wrapper .digital-ampm {\n    color: #A7C7E7 !important;\n    font-size: 0.6em !important;\n    text-shadow: \n        0 0 10px rgba(167, 199, 231, 0.5),\n        0 0 18px rgba(120, 180, 220, 0.3),\n        0 1px 3px rgba(0, 0, 0, 0.4) !important;\n}",
+  "hide": {
+    "greetings": false,
+    "weatherdesc": false,
+    "weathericon": false
+  },
+  "linkstyle": "large",
+  "linktitles": true,
+  "linkbackgrounds": false,
+  "linknewtab": false,
+  "linksrow": "16",
+  "linkgroups": {
+    "on": true,
+    "selected": "Miscellaneous",
+    "groups": [
+      "Socials",
+      "Productivity",
+      "Miscellaneous",
+      "Email",
+      "Cloud",
+      "Studies",
+      "Ai Services",
+      "Settings",
+      "Soccer"
+    ],
+    "pinned": [
+      "Socials",
+      "Productivity"
+    ],
+    "synced": []
+  },
+  "backgrounds": {
+    "type": "files",
+    "fadein": 0,
+    "blur": 0,
+    "bright": 0.92,
+    "frequency": "pause",
+    "color": "#000000",
+    "urls": "",
+    "images": "unsplash-images-collections",
+    "videos": "pixabay-videos-search",
+    "queries": {
+      "pixabay-videos-search": "sunset",
+      "unsplash-images-collections": "0uOzU4PWi_4"
+    },
+    "texture": {
+      "type": "none"
+    },
+    "pausedVideo": {
+      "urls": {
+        "full": "https://cdn.pixabay.com/video/2023/07/04/169951-842348732_small.mp4",
+        "medium": "https://cdn.pixabay.com/video/2023/07/04/169951-842348732_small.mp4",
+        "small": "https://cdn.pixabay.com/video/2023/07/04/169951-842348732_tiny.mp4"
+      },
+      "duration": 11,
+      "format": "video",
+      "page": "https://pixabay.com/videos/id-169951/",
+      "thumbnail": "https://cdn.pixabay.com/video/2023/07/04/169951-842348732_large.jpg",
+      "username": "Kanenori"
+    }
+  },
+  "clock": {
+    "size": 2.25,
+    "ampm": true,
+    "analog": false,
+    "seconds": true,
+    "ampmlabel": false,
+    "worldclocks": false,
+    "timezone": "Asia/Dhaka"
+  },
+  "worldclocks": [
+    {
+      "timezone": "Europe/Berlin"
+    },
+    {
+      "timezone": "America/New_York"
+    }
+  ],
+  "analogstyle": {
+    "face": "swiss",
+    "hands": "braun",
+    "shape": "round",
+    "border": "#ffff",
+    "background": "#fff2"
+  },
+  "weather": {
+    "city": "banani-model-town",
+    "unit": "metric",
+    "provider": "",
+    "moreinfo": "accu",
+    "forecast": "auto",
+    "temperature": "both",
+    "geolocation": "approximate",
+    "ccode": "BD"
+  },
+  "notes": {
+    "on": false,
+    "background": "#fff3",
+    "width": 20,
+    "opacity": 0.1,
+    "align": "center",
+    "text": "## Edit this note!\n\n[ ] With markdown titles, lists, and checkboxes\n\n[ ] Learn more on https://bonjourr.fr/docs/overview"
+  },
+  "searchbar": {
+    "on": true,
+    "background": "#fff0",
+    "width": 60,
+    "opacity": 0.1,
+    "newtab": false,
+    "suggestions": true,
+    "engine": "google",
+    "request": "",
+    "placeholder": "Seek and you shall find"
+  },
+  "quotes": {
+    "on": false,
+    "type": "classic",
+    "frequency": "hour",
+    "author": true,
+    "last": 1761671929000
+  },
+  "font": {
+    "size": "14.35",
+    "family": "M PLUS 1p",
+    "system": false,
+    "weightlist": [],
+    "weight": "400"
+  },
+  "supporters": {
+    "enabled": true,
+    "closed": true,
+    "month": 8
+  },
+  "move": {
+    "selection": "single",
+    "layouts": {
+      "double": {
+        "grid": [
+          [
+            "quicklinks",
+            "."
+          ]
+        ],
+        "items": {
+          "quicklinks": {
+            "text": "",
+            "box": "end baseline"
+          }
+        }
+      },
+      "single": {
+        "grid": [
+          [
+            "time"
+          ],
+          [
+            "searchbar"
+          ],
+          [
+            "quicklinks"
+          ]
+        ],
+        "items": {
+          "time": {
+            "text": "center",
+            "box": "baseline center"
+          },
+          "quicklinks": {
+            "text": "center",
+            "box": "center"
+          },
+          "searchbar": {
+            "text": "center",
+            "box": "center"
+          }
+        }
+      },
+      "triple": {
+        "grid": [
+          [
+            "time",
+            "quicklinks",
+            "quicklinks"
+          ],
+          [
+            "main",
+            ".",
+            "."
+          ]
+        ],
+        "items": {}
+      }
+    }
+  },
+  "linksadliql": {
+    "_id": "linksadliql",
+    "icon": "https://img.freepik.com/premium-vector/classic-pirate-hook-replacing-hand-white-background_98402-177588.jpg",
+    "order": 20,
+    "parent": "Miscellaneous",
+    "title": "Pirate",
+    "url": "https://fmhy.net/video#live-tv-sports"
+  },
+  "linksagqdih": {
+    "_id": "linksagqdih",
+    "icon": "https://api.bonjourr.fr/favicon/blob/https://keep.google.com/u/0/#home",
+    "order": 13,
+    "parent": "Productivity",
+    "title": "Keeps",
+    "url": "https://keep.google.com/u/0/#home"
+  },
+  "linksakghiq": {
+    "_id": "linksakghiq",
+    "icon": "https://static.alphacoders.com/alpha_system_360.png",
+    "order": 0,
+    "parent": "linksqpnhbg",
+    "title": "New Stuff",
+    "url": "https://wall.alphacoders.com/"
+  },
+  "linksbmlmdi": {
+    "_id": "linksbmlmdi",
+    "order": 0,
+    "parent": "linksmjmmcj",
+    "title": "PNG",
+    "url": "https://www.pngegg.com/en/"
+  },
+  "linksbncadd": {
+    "_id": "linksbncadd",
+    "icon": "https://cdn-icons-png.flaticon.com/512/2335/2335410.png",
+    "order": 2,
+    "parent": "Cloud",
+    "title": "One Drive",
+    "url": "https://onedrive.live.com/?id=root&cid=6411E10023E48356"
+  },
+  "linksbnpghj": {
+    "_id": "linksbnpghj",
+    "icon": "https://cdn2.iconfinder.com/data/icons/leto-blue-ui-generic-1/64/ui_-36-256.png",
+    "order": 0,
+    "parent": "linksehahoc",
+    "title": "Monitor Test",
+    "url": "https://whitetestscreen.com/"
+  },
+  "linksbraagg": {
+    "_id": "linksbraagg",
+    "icon": "https://services.bonjourr.fr/favicon/blob/https://www.audiocheck.net/audiotests_stereo.php",
+    "order": 1,
+    "parent": "linksehahoc",
+    "title": "Audio Test",
+    "url": "https://www.audiocheck.net/audiotests_stereo.php"
+  },
+  "linkscarmkl": {
+    "_id": "linkscarmkl",
+    "order": 3,
+    "parent": "Soccer",
+    "title": "Sofascore",
+    "url": "https://www.sofascore.com/favorites"
+  },
+  "linkscfcmco": {
+    "_id": "linkscfcmco",
+    "order": 6,
+    "parent": "Studies",
+    "title": "Colab",
+    "url": "https://colab.research.google.com/"
+  },
+  "linkscggbeh": {
+    "_id": "linkscggbeh",
+    "order": 12,
+    "parent": "Productivity",
+    "title": "Tasks",
+    "url": "https://ticktick.com/webapp/#p/inbox/tasks"
+  },
+  "linkschbeli": {
+    "_id": "linkschbeli",
+    "icon": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhB42QBXN3M3heY3e9oMJGMWRWMgG1VmEz9Q&s",
+    "order": 18,
+    "parent": "Miscellaneous",
+    "title": "Sidemen",
+    "url": "https://www.youtube.com/playlist?list=PLhjLcvbbPVrVOY5w5Pl7KuSe5fGroQJJD"
+  },
+  "linkscirmhn": {
+    "_id": "linkscirmhn",
+    "icon": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCHJ9ej43lZi3G_S4cNWGfgKgjRUPQb3twYw&s",
+    "order": 4,
+    "parent": "Ai Services",
+    "title": "Grok",
+    "url": "https://grok.com/"
+  },
+  "linkscjplkn": {
+    "_id": "linkscjplkn",
+    "icon": "https://c8.alamy.com/zooms/9/2d547e7db1c74d8484dac76d95dce99c/2f31gr4.jpg",
+    "order": 16,
+    "parent": "Miscellaneous",
+    "title": "FTP links",
+    "url": "https://github.com/AbrarRajin/Linkers/blob/main/Entertainment/FTP.md"
+  },
+  "linkscnirce": {
+    "_id": "linkscnirce",
+    "icon": "https://cdn.icon-icons.com/icons2/1448/PNG/512/42604hourglassnotdone_99029.png",
+    "order": 0,
+    "parent": "linksdlcref",
+    "title": "Timer Blog",
+    "url": "https://www.blogger.com/blog/post/edit/1462389229894582641/3804104985721271458"
+  },
+  "linksdfbmop": {
+    "_id": "linksdfbmop",
+    "icon": "https://services.bonjourr.fr/favicon/blob/https://fantasy.premierleague.com/",
+    "order": 7,
+    "parent": "Soccer",
+    "title": "FPL",
+    "url": "https://fantasy.premierleague.com/"
+  },
+  "linksdjinek": {
+    "_id": "linksdjinek",
+    "icon": "https://cdn4.iconfinder.com/data/icons/database-management-4/64/Database-system-software-application-connection-256.png",
+    "order": 2,
+    "parent": "Studies",
+    "title": "RDS 3",
+    "url": "https://rds3.northsouth.edu/"
+  },
+  "linksdlcref": {
+    "_id": "linksdlcref",
+    "order": 14,
+    "parent": "Productivity",
+    "title": "Others",
+    "folder": true
+  },
+  "linksebbaek": {
+    "_id": "linksebbaek",
+    "icon": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPnPjoZlO9Yy-RCb2DRF1miTEoIkulz0SuKg&s",
+    "order": 1,
+    "parent": "linkslffjfg",
+    "title": "Ai Checker",
+    "url": "https://originality.ai/ai-checker"
+  },
+  "linksebmprc": {
+    "_id": "linksebmprc",
+    "order": 8,
+    "parent": "Studies",
+    "title": "Thesis",
+    "folder": true
+  },
+  "linkseeqqnl": {
+    "_id": "linkseeqqnl",
+    "order": 4,
+    "parent": "Cloud",
+    "title": "Google Suite",
+    "folder": true
+  },
+  "linksegocln": {
+    "_id": "linksegocln",
+    "icon": "https://upload.wikimedia.org/wikipedia/commons/5/59/Google_Classroom_Logo.png",
+    "order": 1,
+    "parent": "Studies",
+    "title": "Classroom",
+    "url": "https://classroom.google.com/u/2/h?pli=1"
+  },
+  "linksehahoc": {
+    "_id": "linksehahoc",
+    "order": 5,
+    "parent": "Settings",
+    "title": "Testers",
+    "folder": true
+  },
+  "linksfdqpip": {
+    "_id": "linksfdqpip",
+    "order": 0,
+    "parent": "Socials",
+    "title": "Youtube",
+    "url": "https://www.youtube.com/"
+  },
+  "linksfjbrcq": {
+    "_id": "linksfjbrcq",
+    "icon": "https://services.bonjourr.fr/favicon/blob/https://sites.google.com/view/bdixftpserverlist",
+    "order": 21,
+    "parent": "Miscellaneous",
+    "title": "BDIX List",
+    "url": "https://sites.google.com/view/bdixftpserverlist"
+  },
+  "linksflhdhr": {
+    "_id": "linksflhdhr",
+    "icon": "https://img.utdstc.com/icon/012/cf9/012cf9c4c37f23b8f9961de3d2fa2948cb2d148e6ae62aa1b554b78602d12e6d:200",
+    "order": 3,
+    "parent": "linkslffjfg",
+    "title": "Blackbox",
+    "url": "https://www.blackbox.ai/"
+  },
+  "linksfmnkha": {
+    "_id": "linksfmnkha",
+    "order": 1,
+    "parent": "linksdlcref",
+    "title": "Notion",
+    "url": "https://www.notion.so/Dashboard-65cee4b9256e4d7089fda376ab75a588"
+  },
+  "linksgdiokq": {
+    "_id": "linksgdiokq",
+    "icon": "https://cdn4.iconfinder.com/data/icons/logos-brands-in-colors/48/google-meet-512.png",
+    "order": 5,
+    "parent": "Studies",
+    "title": "Meets",
+    "url": "https://meet.google.com/landing?authuser=1"
+  },
+  "linksgkerrg": {
+    "_id": "linksgkerrg",
+    "icon": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/Facebook_Messenger_logo_2025.svg/1024px-Facebook_Messenger_logo_2025.svg.png",
+    "order": 2,
+    "parent": "Socials",
+    "title": "Messenger",
+    "url": "https://www.messenger.com/e2ee/t/9871531182912119"
+  },
+  "linksgngjrp": {
+    "_id": "linksgngjrp",
+    "icon": "https://cdn3.iconfinder.com/data/icons/research-element/1000/Questionnaire-256.png",
+    "order": 2,
+    "parent": "linksdlcref",
+    "title": "Clipboard",
+    "url": "https://docs.google.com/document/d/1DcI8MN3yN942ZqQlXhbU4mjMMEuBr1JaDLx56juOYSs/edit?usp=sharing"
+  },
+  "linksgrqobd": {
+    "_id": "linksgrqobd",
+    "order": 2,
+    "parent": "linksimjhod",
+    "title": "Earth Weather",
+    "url": "https://zoom.earth/places/bangladesh/dhaka/#map=precipitation/model=icon"
+  },
+  "linkshcagpj": {
+    "_id": "linkshcagpj",
+    "order": 4,
+    "parent": "Socials",
+    "title": "Spotify",
+    "url": "https://open.spotify.com/collection/tracks"
+  },
+  "linkshcdknm": {
+    "_id": "linkshcdknm",
+    "order": 0,
+    "parent": "Email",
+    "title": "Gmail",
+    "url": "https://mail.google.com/mail/u/0/#inbox"
+  },
+  "linkshdbdii": {
+    "_id": "linkshdbdii",
+    "icon": "https://cdn3.iconfinder.com/data/icons/creative-flat/512/color-wheel-creative-256.png",
+    "order": 1,
+    "parent": "linksmjmmcj",
+    "title": "Color Theory",
+    "url": "https://www.canva.com/colors/color-wheel/"
+  },
+  "linkshecaaq": {
+    "_id": "linkshecaaq",
+    "icon": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTdFJwnbf3P6DcgmjQng3hlYV3Y2ILFSnNcTuWa_PZNQEmKUcxpNUyNTELEcIhK1giiRso&usqp=CAU",
+    "order": 10,
+    "parent": "Productivity",
+    "title": "Claude Pro",
+    "url": "https://claude.ai/new"
+  },
+  "linkshhgjnf": {
+    "_id": "linkshhgjnf",
+    "icon": "https://cdn.icon-icons.com/icons2/555/PNG/512/pinterest_icon-icons.com_53605.png",
+    "order": 0,
+    "parent": "linkslphicq",
+    "title": "Pin",
+    "url": "https://www.pinterest.com/"
+  },
+  "linkshlglji": {
+    "_id": "linkshlglji",
+    "icon": "https://cdn-icons-png.flaticon.com/512/5582/5582334.png",
+    "order": 3,
+    "parent": "Settings",
+    "title": "Activity",
+    "url": "https://myactivity.google.com/myactivity"
+  },
+  "linkshlhgbk": {
+    "_id": "linkshlhgbk",
+    "order": 0,
+    "parent": "Cloud",
+    "title": "Mega",
+    "url": "https://mega.nz/"
+  },
+  "linksicocbc": {
+    "_id": "linksicocbc",
+    "icon": "https://www.gstatic.com/images/branding/product/1x/slides_2020q4_48dp.png",
+    "order": 0,
+    "parent": "linkseeqqnl",
+    "title": "G Slides",
+    "url": "https://docs.google.com/presentation/u/0/"
+  },
+  "linksidjalr": {
+    "_id": "linksidjalr",
+    "icon": "https://api.bonjourr.fr/favicon/blob/https://www.fotmob.com/teams/8633/overview/real-madrid",
+    "order": 1,
+    "parent": "Soccer",
+    "title": "Fotmob",
+    "url": "https://www.fotmob.com/"
+  },
+  "linksigclrh": {
+    "_id": "linksigclrh",
+    "icon": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQr4ccOo9DfZdcqGDpygRtkfKIIX9PRJrhQdQ&s",
+    "order": 2,
+    "parent": "linkslffjfg",
+    "title": "Quillbot",
+    "url": "https://quillbot.com/"
+  },
+  "linksigrllp": {
+    "_id": "linksigrllp",
+    "icon": "https://brandlogo.org/wp-content/uploads/2024/04/Microsoft-Copilot-Logo.png.webp",
+    "order": 5,
+    "parent": "Ai Services",
+    "title": "Copilot",
+    "url": "https://copilot.microsoft.com/"
+  },
+  "linksijihnh": {
+    "_id": "linksijihnh",
+    "icon": "https://cdn.icon-icons.com/icons2/2429/PNG/512/facebook_logo_icon_147291.png",
+    "order": 1,
+    "parent": "Socials",
+    "title": "FB",
+    "url": "https://www.facebook.com/"
+  },
+  "linksimjhod": {
+    "_id": "linksimjhod",
+    "order": 22,
+    "parent": "Miscellaneous",
+    "title": "Weather",
+    "folder": true
+  },
+  "linksjceold": {
+    "_id": "linksjceold",
+    "order": 7,
+    "parent": "Studies",
+    "title": "Kaggle",
+    "url": "https://www.kaggle.com/work"
+  },
+  "linksjeaaac": {
+    "_id": "linksjeaaac",
+    "icon": "https://cdn1.iconfinder.com/data/icons/unicons-line-vol-3/24/youtube-256.png",
+    "order": 4,
+    "parent": "Studies",
+    "title": "Youtube Zero",
+    "url": "https://www.youtube.com/feed"
+  },
+  "linksjebnja": {
+    "_id": "linksjebnja",
+    "icon": "https://cdn-icons-png.freepik.com/512/1313/1313717.png",
+    "order": 1,
+    "parent": "Email",
+    "title": "NSU gmail",
+    "url": "https://mail.google.com/mail/u/2/#inbox"
+  },
+  "linksjhaakb": {
+    "_id": "linksjhaakb",
+    "icon": "https://static.vecteezy.com/system/resources/thumbnails/037/361/807/small/vision-icon-vector.jpg",
+    "order": 19,
+    "parent": "Miscellaneous",
+    "title": "Watchlist",
+    "url": "https://docs.google.com/document/d/1eZzXP_I3SMwCaZq7wiy0Vfiu3_Ea8UQAgQC99Kpf1Mk/edit?usp=sharing"
+  },
+  "linksjhaglh": {
+    "_id": "linksjhaglh",
+    "order": 2,
+    "parent": "linksebmprc",
+    "title": "Thesis",
+    "url": "https://www.overleaf.com/project/6856d6db58e21f6926a5bb44"
+  },
+  "linksjolkli": {
+    "_id": "linksjolkli",
+    "order": 1,
+    "parent": "linkslphicq",
+    "title": "Reddit",
+    "url": "https://www.reddit.com/"
+  },
+  "linkskcdmeq": {
+    "_id": "linkskcdmeq",
+    "icon": "https://cdn.icon-icons.com/icons2/1945/PNG/512/iconfinder-discord-4661587_122459.png",
+    "order": 2,
+    "parent": "linkslphicq",
+    "title": "Discord",
+    "url": "https://discord.com/channels/@me"
+  },
+  "linkskedjqj": {
+    "_id": "linkskedjqj",
+    "order": 1,
+    "parent": "Ai Services",
+    "title": "Claude Pro",
+    "url": "https://claude.ai/new"
+  },
+  "linkskhkkpb": {
+    "_id": "linkskhkkpb",
+    "icon": "https://cdn1.iconfinder.com/data/icons/fame/512/fame_popularity_celebrity-15-512.png",
+    "order": 15,
+    "parent": "Productivity",
+    "title": "Screens",
+    "url": "https://docs.google.com/presentation/d/1aeTW07zDS0ZMy0cImReOXXLyHIfDV-Gs7-pkhYOS5bs/present"
+  },
+  "linkskipcnc": {
+    "_id": "linkskipcnc",
+    "icon": "https://i1.sndcdn.com/artworks-000073999131-xbac5b-t500x500.jpg",
+    "order": 2,
+    "parent": "Soccer",
+    "title": "FOTUnited",
+    "url": "https://www.fotmob.com/teams/10260/overview/manchester-united"
+  },
+  "linkskmjjqh": {
+    "_id": "linkskmjjqh",
+    "icon": "https://cdn4.iconfinder.com/data/icons/office-25/63/timer-256.png",
+    "order": 3,
+    "parent": "linksdlcref",
+    "title": "Countdowns",
+    "url": "https://quickaccess101.blogspot.com/2024/10/countdowns.html"
+  },
+  "linkskmkjrr": {
+    "_id": "linkskmkjrr",
+    "icon": "https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/x-social-media-white-icon.png",
+    "order": 5,
+    "parent": "Socials",
+    "title": "Twitter",
+    "url": "https://twitter.com/home"
+  },
+  "linkskoflrc": {
+    "_id": "linkskoflrc",
+    "order": 4,
+    "parent": "linksdlcref",
+    "title": "My Timers",
+    "url": "https://www.tickcounter.com/my"
+  },
+  "linksldmlin": {
+    "_id": "linksldmlin",
+    "icon": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQOzjXL-sDQxfCoNEchnEzQLDAwQxv8QHm2AQ&s",
+    "order": 4,
+    "parent": "Soccer",
+    "title": "SOFAUnited",
+    "url": "https://www.sofascore.com/team/football/manchester-united/35"
+  },
+  "linkslffjfg": {
+    "_id": "linkslffjfg",
+    "order": 6,
+    "parent": "Ai Services",
+    "title": "Checker/Mod",
+    "folder": true
+  },
+  "linkslkinlk": {
+    "_id": "linkslkinlk",
+    "icon": "https://services.bonjourr.fr/favicon/blob/https://github.com/AbrarRajin",
+    "order": 11,
+    "parent": "Productivity",
+    "title": "GitHub",
+    "url": "https://github.com/AbrarRajin?tab=repositories"
+  },
+  "linkslphicq": {
+    "_id": "linkslphicq",
+    "order": 7,
+    "parent": "Socials",
+    "title": "folder",
+    "folder": true
+  },
+  "linksmcjdpa": {
+    "_id": "linksmcjdpa",
+    "icon": "https://i.ibb.co.com/BVgbF0Gf/D5-ADF545-6-E29-41-E3-94-A9-2-D364-F121-B67.png",
+    "order": 0,
+    "parent": "Ai Services",
+    "title": "Ai Search",
+    "url": "http://www.google.com/aimode"
+  },
+  "linksmibogr": {
+    "_id": "linksmibogr",
+    "icon": "https://img.freepik.com/premium-vector/chatgpt-ai-logo-icon_11410-496.jpg?w=360",
+    "order": 9,
+    "parent": "Productivity",
+    "title": "GPT PRO",
+    "url": "https://chatgpt.com/g/g-p-684c5ebe5f0c819188bef0aab51e924c-general-projects/project"
+  },
+  "linksmicagp": {
+    "_id": "linksmicagp",
+    "icon": "https://www.instructure.com/sites/default/files/image/2021-12/Canvas_Stacked_ByInstructure_Color_RGB.png",
+    "order": 0,
+    "parent": "Studies",
+    "title": "Canvas",
+    "url": "https://northsouth.instructure.com/"
+  },
+  "linksmieggb": {
+    "_id": "linksmieggb",
+    "order": 5,
+    "parent": "Cloud",
+    "title": "G Docs",
+    "url": "https://docs.google.com/document/u/0/"
+  },
+  "linksmijojh": {
+    "_id": "linksmijojh",
+    "order": 1,
+    "parent": "linksimjhod",
+    "title": "AQI Index",
+    "url": "https://www.iqair.com/bangladesh/dhaka/dhaka"
+  },
+  "linksmjmmcj": {
+    "_id": "linksmjmmcj",
+    "order": 2,
+    "parent": "Settings",
+    "title": "Design Esst",
+    "folder": true
+  },
+  "linksmjrrrl": {
+    "_id": "linksmjrrrl",
+    "order": 3,
+    "parent": "Ai Services",
+    "title": "Gemini",
+    "url": "https://gemini.google.com/app"
+  },
+  "linksmkbmdk": {
+    "_id": "linksmkbmdk",
+    "icon": "https://cdn2.iconfinder.com/data/icons/buno-weather/32/index_radiation_ray_sun_ultraviolet_uv-42-256.png",
+    "order": 0,
+    "parent": "linksimjhod",
+    "title": "UV Index",
+    "url": "https://en.tutiempo.net/ultraviolet-index/dhaka.html"
+  },
+  "linksndfgjb": {
+    "_id": "linksndfgjb",
+    "icon": "https://www.gstatic.com/images/branding/product/1x/sheets_2020q4_48dp.png",
+    "order": 1,
+    "parent": "linkseeqqnl",
+    "title": "G Sheets",
+    "url": "https://docs.google.com/spreadsheets/u/0/?tgif=d"
+  },
+  "linksndibjc": {
+    "_id": "linksndibjc",
+    "order": 0,
+    "parent": "Soccer",
+    "title": "United Web",
+    "url": "https://www.manutd.com/"
+  },
+  "linksnjqeor": {
+    "_id": "linksnjqeor",
+    "order": 1,
+    "parent": "Cloud",
+    "title": "G Drive",
+    "url": "https://drive.google.com/drive/u/0/my-drive"
+  },
+  "linksnkalro": {
+    "_id": "linksnkalro",
+    "icon": "https://cdn4.iconfinder.com/data/icons/basic-ui-colour/512/ui-41-256.png",
+    "order": 0,
+    "parent": "Settings",
+    "title": "No Sleep",
+    "url": "https://nosleep.page/"
+  },
+  "linksnrnlib": {
+    "_id": "linksnrnlib",
+    "icon": "https://cdn0.iconfinder.com/data/icons/leto-time/64/__calendar_clock_plan_schedule-256.png",
+    "order": 3,
+    "parent": "Studies",
+    "title": "Cal NSU",
+    "url": "https://www.northsouth.edu/academic/academic-calendar/"
+  },
+  "linksoajfnl": {
+    "_id": "linksoajfnl",
+    "order": 3,
+    "parent": "linksmjmmcj",
+    "title": "imgbb",
+    "url": "https://guterfresh.imgbb.com/"
+  },
+  "linksodgrpn": {
+    "_id": "linksodgrpn",
+    "icon": "https://services.bonjourr.fr/favicon/blob/https://docs.google.com/document/d/112xQmLFxDSmldrzPWj8sqzDGDy3XnC5nMbUd5zhpveM/edit?usp=sharing",
+    "order": 1,
+    "parent": "linksebmprc",
+    "title": "PaperWrDocs",
+    "url": "https://docs.google.com/document/d/112xQmLFxDSmldrzPWj8sqzDGDy3XnC5nMbUd5zhpveM/edit?usp=sharing"
+  },
+  "linksoidadj": {
+    "_id": "linksoidadj",
+    "icon": "https://i.pinimg.com/564x/47/cb/4b/47cb4bcdbd9e089f03d06abf342cbc4c.jpg",
+    "order": 17,
+    "parent": "Miscellaneous",
+    "title": "Live TV",
+    "url": "https://github.com/AbrarRajin/Linkers/blob/main/Entertainment/Live_TV.md"
+  },
+  "linksojkkap": {
+    "_id": "linksojkkap",
+    "order": 1,
+    "parent": "linksqpnhbg",
+    "title": "Phone x PC",
+    "url": "https://wallpapercat.com/#logo"
+  },
+  "linksoninbi": {
+    "_id": "linksoninbi",
+    "order": 5,
+    "parent": "linksqpnhbg",
+    "title": "GIF walls",
+    "url": "https://wallpapers-clan.com/desktop-wallpapers"
+  },
+  "linkspefief": {
+    "_id": "linkspefief",
+    "order": 2,
+    "parent": "linksmjmmcj",
+    "title": "IconFinder",
+    "url": "https://www.iconfinder.com/"
+  },
+  "linksphhmki": {
+    "_id": "linksphhmki",
+    "order": 5,
+    "parent": "Soccer",
+    "title": "Yosin",
+    "url": "https://www.yosin-tv.net/"
+  },
+  "linkspknrdc": {
+    "_id": "linkspknrdc",
+    "order": 2,
+    "parent": "linksqpnhbg",
+    "title": "4K Dual",
+    "url": "https://4kwallpapers.com/dual-monitor-hd-wallpapers?page=01"
+  },
+  "linksppqrjn": {
+    "_id": "linksppqrjn",
+    "icon": "https://play-lh.googleusercontent.com/f_jViy8D3Occ72hmplRYXbWdH7JUdRrI9uRR0t2TxhZfugUHbLp3KI0NK7dBNhzmsKE",
+    "order": 2,
+    "parent": "Email",
+    "title": "Yandex",
+    "url": "https://mail.yandex.com/"
+  },
+  "linksqbjnjj": {
+    "_id": "linksqbjnjj",
+    "order": 0,
+    "parent": "linksebmprc",
+    "title": "Grammarly",
+    "url": "https://app.grammarly.com/ddocs/2857003451"
+  },
+  "linksqcpneb": {
+    "_id": "linksqcpneb",
+    "order": 8,
+    "parent": "Productivity",
+    "title": "Google Cal",
+    "url": "https://calendar.google.com/calendar/u/0/r?pli=1"
+  },
+  "linksqebrni": {
+    "_id": "linksqebrni",
+    "icon": "https://cdn2.iconfinder.com/data/icons/appliance-electronic-vol-3/512/speaker_moniter_stereo_bass-256.png",
+    "order": 4,
+    "parent": "Settings",
+    "title": "White Noise",
+    "url": "https://mynoise.net/NoiseMachines/whiteNoiseGenerator.php?l=00000401080112110607&a=1&am=s&title=White%20Noise%20&%20Co"
+  },
+  "linksqegbgp": {
+    "_id": "linksqegbgp",
+    "icon": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcc-4w3ZxZ4GkRUL-ZZ5U3PxywWaao0RitWg&s",
+    "order": 0,
+    "parent": "linkslffjfg",
+    "title": "Grammarly",
+    "url": "https://app.grammarly.com/ddocs/2199310323"
+  },
+  "linksqfmakf": {
+    "_id": "linksqfmakf",
+    "icon": "https://icon2.cleanpng.com/20180320/qde/aveztycog.webp",
+    "order": 3,
+    "parent": "Email",
+    "title": "DT",
+    "url": "https://mail.google.com/mail/u/1/#inbox"
+  },
+  "linksqnkirf": {
+    "_id": "linksqnkirf",
+    "icon": "https://cdn4.iconfinder.com/data/icons/olympic-games-20/512/soccer-ball-sports-game-football-256.png",
+    "order": 6,
+    "parent": "Soccer",
+    "title": "FOOTEM",
+    "url": "https://www.footem.site/"
+  },
+  "linksqpnhbg": {
+    "_id": "linksqpnhbg",
+    "order": 1,
+    "parent": "Settings",
+    "title": "Customize",
+    "folder": true
+  },
+  "linksrbbjaf": {
+    "_id": "linksrbbjaf",
+    "icon": "https://cdn3.iconfinder.com/data/icons/smart-tv-flaticon/64/UHD-monitor-electronics-television-screen-256.png",
+    "order": 3,
+    "parent": "linksqpnhbg",
+    "title": "UHD",
+    "url": "https://www.uhdpaper.com/"
+  },
+  "linksrbqrko": {
+    "_id": "linksrbqrko",
+    "order": 3,
+    "parent": "Cloud",
+    "title": "Send Any",
+    "url": "https://send-anywhere.com/#transfer"
+  },
+  "linksrkggjq": {
+    "_id": "linksrkggjq",
+    "icon": "https://api.bonjourr.fr/favicon/blob/https://www.instagram.com/",
+    "order": 3,
+    "parent": "Socials",
+    "title": "Insta",
+    "url": "https://www.instagram.com/"
+  },
+  "linksrnklga": {
+    "_id": "linksrnklga",
+    "icon": "https://cdn.icon-icons.com/icons2/1826/PNG/512/4202050chatlogosocialsocialmediawhatsapp-115638_115663.png",
+    "order": 6,
+    "parent": "Socials",
+    "title": "Whatsapp",
+    "url": "https://web.whatsapp.com/"
+  },
+  "linksroicqd": {
+    "_id": "linksroicqd",
+    "icon": "https://cdn0.iconfinder.com/data/icons/esport-gaming-2/66/86_ultra_wide_gaming_screen_gaming_screen_gaming_monitor_screen_setup_ultrawide_monitor-256.png",
+    "order": 4,
+    "parent": "linksqpnhbg",
+    "title": "UW",
+    "url": "https://ultrawidewallpapers.net/"
+  },
+  "linksrqehrg": {
+    "_id": "linksrqehrg",
+    "icon": "https://i.pinimg.com/736x/5a/0e/35/5a0e35016be8f79dad3059cc1d4dd75a.jpg",
+    "order": 2,
+    "parent": "Ai Services",
+    "title": "ChatGPT",
+    "url": "https://chatgpt.com/g/g-p-684c5ebe5f0c819188bef0aab51e924c-general-projects/project"
+  },
+  "linksrqopqk": {
+    "_id": "linksrqopqk",
+    "icon": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRp8SRapL9io2xFxcbIE4EkpwWD8CqRB3uzvA&s",
+    "order": 4,
+    "parent": "Email",
+    "title": "Tuta",
+    "url": "https://app.tuta.com/mail/"
+  },
+  "background_solid": "#222"
+}
